@@ -9,7 +9,7 @@ permissions:
 env:
   KERNEL_REPO: https://github.com/99-blossom/kernel_xiaomi_blossom_linux
   KERNEL_DIR: kernel_src
-  DEFCONFIG: blossom_gnulinux_defconfig
+  DEFCONFIG: blossom_linux_defconfig
   CROSS_COMPILE: aarch64-linux-gnu-
   CLANG_TRIPLE: aarch64-linux-gnu-
   CCACHE_DIR: /home/runner/.cache/ccache
