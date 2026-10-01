@@ -70,7 +70,7 @@ jobs:
       - name: Build kernel
         working-directory: ${{ env.KERNEL_DIR }}
         run: |
-          JOBS=$(nproc)
+          JOBS=$(( $(nproc) + 1 ))
           make O=out ARCH=arm64 \
             CC="ccache clang" \
             CLANG_TRIPLE=${{ env.CLANG_TRIPLE }} \
