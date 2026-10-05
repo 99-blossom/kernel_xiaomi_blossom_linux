@@ -67,10 +67,44 @@ jobs:
         run: |
           make ARCH=arm64 O=out ${{ env.DEFCONFIG }}
 
+      - name: Move build output to tmpfs
+        working-directory: ${{ env.KERNEL_DIR }}
+        run: |
+          TMP_OUT="$RUNNER_TEMP/kernel-out"
+
+          echo "Saving defconfig output..."
+          mkdir -p "$TMP_OUT"
+          cp -a out/. "$TMP_OUT/"
+
+          echo "Removing SSD out directory..."
+          rm -rf out
+
+          echo "Creating tmpfs mount point..."
+          mkdir -p out
+
+          echo "Mounting 4 GiB tmpfs..."
+          sudo mount -t tmpfs \
+            -o size=4G,mode=0755 \
+            tmpfs out
+
+          echo "Restoring defconfig output into tmpfs..."
+          cp -a "$TMP_OUT/." out/
+
+          rm -rf "$TMP_OUT"
+
+          echo
+          echo "Filesystem:"
+          df -h out
+
+          echo
+          echo "Mount:"
+          findmnt "$(pwd)/out"
+
       - name: Build kernel
         working-directory: ${{ env.KERNEL_DIR }}
         run: |
           JOBS=$(( $(nproc) + 1 ))
+
           make O=out ARCH=arm64 \
             CC="ccache clang" \
             CLANG_TRIPLE=${{ env.CLANG_TRIPLE }} \
@@ -86,7 +120,9 @@ jobs:
         working-directory: ${{ env.KERNEL_DIR }}
         run: |
           test -s out/arch/arm64/boot/Image
+
           ls -lh out/arch/arm64/boot/Image
+
           if [ -s out/arch/arm64/boot/Image.gz ]; then
             ls -lh out/arch/arm64/boot/Image.gz
           fi
