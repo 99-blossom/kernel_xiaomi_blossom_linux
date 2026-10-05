@@ -87,6 +87,9 @@ jobs:
             -o size=4G,mode=0755 \
             tmpfs out
 
+          echo "Changing tmpfs ownership..."
+          sudo chown "$(id -u):$(id -g)" out
+
           echo "Restoring defconfig output into tmpfs..."
           cp -a "$TMP_OUT/." out/
 
@@ -99,6 +102,10 @@ jobs:
           echo
           echo "Mount:"
           findmnt "$(pwd)/out"
+
+          echo
+          echo "Ownership:"
+          ls -ld out
 
       - name: Build kernel
         working-directory: ${{ env.KERNEL_DIR }}
