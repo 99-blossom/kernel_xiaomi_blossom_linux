@@ -817,6 +817,14 @@ config CHARGER_BQ2560X
 	  It depends on
 	  the config MTK_CHARGER.
 
+config CHARGER_SGM41513
+	tristate "SG Micro SGM41513 charger driver"
+	depends on I2C
+	depends on MTK_CHARGER
+	help
+	  Say Y to enable support for the SGM41513 charger IC
+	  with the MediaTek charger framework.
+
 config CHARGER_CX7601
     bool "CHARGER_CX7601"
 	depends on MTK_CHARGER
