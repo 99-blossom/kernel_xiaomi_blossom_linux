@@ -758,7 +758,7 @@ config CHARGER_RT9458
 	bool "Charger Driver for Richtek RT9458 Charger IC"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable
+	  Say Y to enable
 	  Richtek RT9458 driver.
 	  It depends on
 	  the config MTK_CHARGER.
@@ -767,7 +767,7 @@ config CHARGER_RT9465
 	bool "Charger Driver for Richtek RT9465 Charger IC"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable Richtek RT9465 driver.
+	  Say Y to enable Richtek RT9465 driver.
 	  It is mainly used as slave IC for dual charger
 	  application.
 	  It depends on config MTK_CHARGER.
@@ -776,7 +776,7 @@ config CHARGER_RT9466
 	bool "Charger Driver for Richtek RT9466 Charger IC"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable Richtek RT9466 driver.
+	  Say Y to enable Richtek RT9466 driver.
 	  It is mainly used as slave IC for dual charger
 	  application.
 	  It depends on config MTK_CHARGER.
@@ -785,7 +785,7 @@ config CHARGER_RT9467
 	bool "Charger Driver for Richtek RT9467 Charger IC"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable Richtek RT9467 driver.
+	  Say Y to enable Richtek RT9467 driver.
 	  It is mainly used as slave IC for dual charger
 	  application.
 	  It depends on config MTK_CHARGER.
@@ -794,7 +794,7 @@ config CHARGER_RT9471
 	bool "Charger Driver for Richtek RT9471 Charger IC"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable Richtek RT9471 driver.
+	  Say Y to enable Richtek RT9471 driver.
 	  It supports RT9470/RT9470D/RT9471/RT9471D,
 	  which RT9470D and RT9471D support BC1.2
 	  It depends on config MTK_CHARGER.
@@ -803,7 +803,7 @@ config CHARGER_BQ25601
 	bool "CHARGER_BQ25601"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable
+	  Say Y to enable
 	  TI BQ25601 driver.
 	  It depends on
 	  the config MTK_CHARGER.
@@ -812,7 +812,7 @@ config CHARGER_BQ2560X
     bool "CHARGER_BQ2560X"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable
+	  Say Y to enable
 	  TI BQ25601 driver.
 	  It depends on
 	  the config MTK_CHARGER.
@@ -821,7 +821,7 @@ config CHARGER_CX7601
     bool "CHARGER_CX7601"
 	depends on MTK_CHARGER
 	help
-	  Say Yes to enable
+	  Say Y to enable
 	  SUNCORE CX7601 driver.
 	  It depends on
 	  the config MTK_CHARGER.
