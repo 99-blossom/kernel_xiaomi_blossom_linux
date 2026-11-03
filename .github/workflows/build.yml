@@ -7,7 +7,6 @@ permissions:
   contents: write
 
 env:
-  KERNEL_REPO: https://github.com/99-blossom/kernel_xiaomi_blossom_linux
   KERNEL_DIR: kernel_src
   DEFCONFIG: blossom_linux_defconfig
   CROSS_COMPILE: aarch64-linux-gnu-
@@ -58,9 +57,11 @@ jobs:
           ccache --zero-stats
           ccache --show-stats
 
-      - name: Clone kernel sources
-        run: |
-          git clone --depth=1 --no-tags "$KERNEL_REPO" "$KERNEL_DIR"
+      - name: Check out kernel sources
+        uses: actions/checkout@v4
+        with:
+          path: ${{ env.KERNEL_DIR }}
+          persist-credentials: false
 
       - name: Generate defconfig
         working-directory: ${{ env.KERNEL_DIR }}
