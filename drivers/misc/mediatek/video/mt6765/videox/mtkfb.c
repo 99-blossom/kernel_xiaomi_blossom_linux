@@ -254,9 +254,14 @@ static int mtkfb1_blank(int blank_mode, struct fb_info *info)
 }
 #endif
 
+static int mtkfb_pan_display_impl(struct fb_var_screeninfo *var,
+	struct fb_info *info);
+
 static int mtkfb_blank(int blank_mode, struct fb_info *info)
 {
 	enum mtkfb_power_mode prev_pm = primary_display_get_power_mode();
+	/* pgc->pm starts as FB_SUSPEND, so check the display state */
+	int was_asleep = primary_display_is_sleepd();
 
 	switch (blank_mode) {
 	case FB_BLANK_UNBLANK:
@@ -270,6 +275,17 @@ static int mtkfb_blank(int blank_mode, struct fb_info *info)
 
 		primary_display_set_power_mode(FB_RESUME);
 		mtkfb_late_resume();
+		if (was_asleep) {
+			/*
+			 * Resume disables all layers, and the panel init
+			 * sequence sets the brightness to 0. fbdev users
+			 * (fbcon, Xorg fbdev) send no new frame and no
+			 * brightness, so show the framebuffer again and
+			 * restore the last brightness.
+			 */
+			mtkfb_pan_display_impl(&info->var, info);
+			primary_display_restore_backlight();
+		}
 
 		debug_print_power_mode_check(prev_pm, FB_RESUME);
 		break;
