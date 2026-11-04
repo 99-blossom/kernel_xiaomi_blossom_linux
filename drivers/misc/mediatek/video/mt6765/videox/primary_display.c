@@ -7998,7 +7998,7 @@ int _set_backlight_by_cpu(unsigned int level)
 /* Last level sent to the panel, UINT_MAX until the first one */
 static unsigned int primary_bl_level = UINT_MAX;
 #ifdef CONFIG_BACKLIGHT_SUPPORT_2047_FEATURE
-#define PRIMARY_BL_DEFAULT_LEVEL 1024
+#define PRIMARY_BL_DEFAULT_LEVEL 2047
 #else
 #define PRIMARY_BL_DEFAULT_LEVEL 128
 #endif
